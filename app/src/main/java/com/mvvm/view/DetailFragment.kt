@@ -22,10 +22,6 @@ class DetailFragment : Fragment()
     {
         super.onViewCreated(view, savedInstanceState)
 
-        button_list.setOnClickListener {
-            val action = DetailFragmentDirections.actionList()
-            Navigation.findNavController(it).navigate(action)
-        }
     }
 
 }
