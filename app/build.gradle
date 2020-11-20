@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -70,15 +71,15 @@ dependencies {
 
     implementation "com.android.support:palette-v7:$supportVersion"
 
-    implementation "com.google.dagger:dagger$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    //implementation "com.google.dagger:dagger$daggerVersion"
+    //implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    //implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 
-    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation "android.arch.core:core-testing:1.1.1"
-    kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
+    //testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    //testImplementation "android.arch.core:core-testing:1.1.1"
+    //kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
