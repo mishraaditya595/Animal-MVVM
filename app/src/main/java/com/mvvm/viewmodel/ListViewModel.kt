@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mvvm.model.Animal
 import com.mvvm.model.AnimalApiService
 import com.mvvm.model.ApiKey
+import com.mvvm.util.SharedPreferencesHelper
 import com.mvvm.view.ListFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -22,7 +23,26 @@ class ListViewModel (application: Application): AndroidViewModel(application)
     private val disposable = CompositeDisposable()
     private val apiService = AnimalApiService()
 
+    private val prefs = SharedPreferencesHelper(getApplication())
+
+    private var invalidAPIKey = false
+
     fun refresh()
+    {
+        loading.value = true
+        invalidAPIKey = false
+        val key = prefs.getApiKey()
+        if (key.isNullOrEmpty())
+        {
+            getKey()
+        }
+        else
+        {
+            getAnimals(key)
+        }
+    }
+
+    fun hardRefresh()
     {
         loading.value = true
         getKey()
@@ -44,6 +64,7 @@ class ListViewModel (application: Application): AndroidViewModel(application)
                         }
                         else
                         {
+                            prefs.saveApiKey(keyObject.key)
                             getAnimals(keyObject.key)
                         }
                     }
@@ -74,10 +95,18 @@ class ListViewModel (application: Application): AndroidViewModel(application)
 
                     override fun onError(e: Throwable)
                     {
-                        e.printStackTrace()
-                        loading.value = false
-                        animals.value = null
-                        loadError.value = true
+                        if (!invalidAPIKey)
+                        {
+                            invalidAPIKey = true
+                            getKey()
+                        }
+                        else
+                        {
+                            e.printStackTrace()
+                            loading.value = false
+                            animals.value = null
+                            loadError.value = true
+                        }
                     }
 
                 })
