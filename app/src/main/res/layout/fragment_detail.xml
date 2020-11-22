@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailFragment"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:id="@+id/detailLayout">
 
     <ImageView
         android:id="@+id/animalImage"

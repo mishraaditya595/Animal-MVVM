@@ -3,6 +3,7 @@ package com.mvvm.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvm.R
 import com.mvvm.model.Animal
@@ -32,6 +33,10 @@ class AnimalListAdapter(private val animalList: ArrayList<Animal>):
         holder.view.animal_name.text = animalList[position].name
         holder.view.animal_image.loadImage(animalList[position].imageUrl, getProgressDrawable(holder.view.context))
 
+        holder.view.animalLayout.setOnClickListener {
+            val action = ListFragmentDirections.actionDetail(animalList[position])
+            Navigation.findNavController(holder.view).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int
