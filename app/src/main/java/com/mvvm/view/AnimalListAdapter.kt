@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mvvm.R
 import com.mvvm.model.Animal
+import com.mvvm.util.getProgressDrawable
+import com.mvvm.util.loadImage
 import kotlinx.android.synthetic.main.item_animal.view.*
 
 class AnimalListAdapter(private val animalList: ArrayList<Animal>):
@@ -28,6 +30,8 @@ class AnimalListAdapter(private val animalList: ArrayList<Animal>):
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int)
     {
         holder.view.animal_name.text = animalList[position].name
+        holder.view.animal_image.loadImage(animalList[position].imageUrl, getProgressDrawable(holder.view.context))
+
     }
 
     override fun getItemCount(): Int
