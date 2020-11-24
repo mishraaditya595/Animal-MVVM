@@ -71,6 +71,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     implementation "com.android.support:palette-v7:$supportVersion"
+
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
     implementation 'com.google.dagger:dagger:2.14.1'
