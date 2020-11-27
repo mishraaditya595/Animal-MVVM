@@ -17,6 +17,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.mvvm.R
 import com.mvvm.databinding.FragmentDetailBinding
 import com.mvvm.model.Animal
+import com.mvvm.model.AnimalPalette
 import com.mvvm.util.getProgressDrawable
 import com.mvvm.util.loadImage
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -65,7 +66,7 @@ class DetailFragment : Fragment()
                 {
                     Palette.from(resource).generate {
                         val intColor = it?.lightMutedSwatch?.rgb ?: 0
-                        dataBinding.detailLayout.setBackgroundColor(intColor)
+                        dataBinding.palette = AnimalPalette(intColor)
                     }
                 }
 

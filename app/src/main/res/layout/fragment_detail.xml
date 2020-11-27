@@ -9,6 +9,9 @@
             name="animal"
             type="com.mvvm.model.Animal"
             />
+        <variable
+            name="palette"
+            type="com.mvvm.model.AnimalPalette" />
     </data>
 
     <LinearLayout
@@ -17,6 +20,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:background="@{palette.colour}"
         tools:context=".view.DetailFragment">
 
         <ImageView
