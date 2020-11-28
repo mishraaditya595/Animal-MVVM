@@ -4,6 +4,7 @@ import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.mvvm.di.AppModule
 import com.mvvm.di.DaggerViewModelComponent
 import com.mvvm.model.Animal
 import com.mvvm.model.AnimalApiService
@@ -24,15 +25,20 @@ class ListViewModel (application: Application): AndroidViewModel(application)
 
     private val disposable = CompositeDisposable()
 
-    @Inject lateinit var apiService: AnimalApiService
+    @Inject
+    lateinit var apiService: AnimalApiService
 
-    private val prefs = SharedPreferencesHelper(getApplication())
+    @Inject
+    lateinit var prefs: SharedPreferencesHelper
 
     private var invalidAPIKey = false
 
     init
     {
-        DaggerViewModelComponent.create().inject(this)
+        DaggerViewModelComponent.builder()
+            .appModule(AppModule(getApplication()))
+            .build()
+            .inject(this)
     }
 
     fun refresh()
