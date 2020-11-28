@@ -9,7 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class APIModule
+open class APIModule
 {
     private val BASE_URL = "https://us-central1-apis-4674e.cloudfunctions.net/"
 
@@ -25,7 +25,7 @@ class APIModule
     }
 
     @Provides
-    fun provideAnimalApiService(): AnimalApiService
+    open fun provideAnimalApiService(): AnimalApiService
     {
         return AnimalApiService()
     }

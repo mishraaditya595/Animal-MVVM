@@ -19,6 +19,11 @@ import javax.inject.Inject
 
 class ListViewModel (application: Application): AndroidViewModel(application)
 {
+    constructor(application: Application, test: Boolean = true): this(application)
+    {
+        injected = true
+    }
+
     val animals by lazy { MutableLiveData<List<Animal>>() }
     val loadError by lazy { MutableLiveData<Boolean>() }
     val loading by lazy { MutableLiveData<Boolean>() }
@@ -32,17 +37,23 @@ class ListViewModel (application: Application): AndroidViewModel(application)
     lateinit var prefs: SharedPreferencesHelper
 
     private var invalidAPIKey = false
+    private var injected = false
 
-    init
+    fun inject()
     {
-        DaggerViewModelComponent.builder()
-            .appModule(AppModule(getApplication()))
-            .build()
-            .inject(this)
+        if (!injected)
+        {
+            DaggerViewModelComponent.builder()
+                .appModule(AppModule(getApplication()))
+                .build()
+                .inject(this)
+        }
     }
 
     fun refresh()
     {
+        inject()
+
         loading.value = true
         invalidAPIKey = false
         val key = prefs.getApiKey()
@@ -58,6 +69,8 @@ class ListViewModel (application: Application): AndroidViewModel(application)
 
     fun hardRefresh()
     {
+        inject()
+
         loading.value = true
         getKey()
     }
